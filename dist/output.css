@@ -868,6 +868,10 @@ video {
   padding-top: 2.25rem;
 }
 
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
 .text-end {
   text-align: end;
 }
@@ -919,6 +923,10 @@ video {
   font-weight: 600;
 }
 
+.font-normal {
+  font-weight: 400;
+}
+
 .text-\[\#ededed\] {
   --tw-text-opacity: 1;
   color: rgb(237 237 237 / var(--tw-text-opacity));
@@ -964,7 +972,8 @@ video {
 }
 
 body {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   color:#999999;
@@ -1023,24 +1032,6 @@ nav a.active {
 
   50% {
     border-color: orange;
-  }
-}
-
-.down-arrow{
-  animation: jumpInfinite 1.5s infinite;
-}
-
-@keyframes jumpInfinite {
-  0% {
-    margin-top: 0;
-  }
-
-  50% {
-    margin-top: 20px;
-  }
-
-  100% {
-    margin-top: 0;
   }
 }
 
@@ -1170,7 +1161,3 @@ nav a.active {
     line-height: 50px;
   }
 }
-  
-
-
-  
