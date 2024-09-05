@@ -1,0 +1,779 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Abhranil Chandra</title>
+    <link href="dist/output.css" rel="stylesheet">
+    <link href="dist/owl.carousel.min.css" rel="stylesheet">
+    <link href="dist/owl.theme.default.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-white">
+
+    <div class=" flex flex-col md:flex-row">
+        <div class="navigation-bar bg-[#000] sticky top-0 left-0 z-40 md:w-96 md:h-screen md:fixed">
+            <div class="h-full p-5 sticky top-0 left-0">
+                <div class="flex md:items-center flex-col h-full justify-between">
+                    <div class="flex flex-row md:flex-col justify-between">
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="w-[50px] h-[50px] md:w-[130px] md:h-[130px] flex flex-col md:flex-row rounded-full bg-[#622929] overflow-hidden border-2 border-gray-500">
+                                <a href="index.html"><img src="assets/images/dp.jpg" alt=""></a>
+                            </div>
+                            <h4 class="text-2xl mt-4 font-bold py-9 hidden md:block"><a href="index.html">Abhranil
+                                    Chandra</a></h4>
+                        </div>
+                        <a href="javascript:void(0)" class="mobile-men-icon visible md:hidden text-5xl"><i
+                                class="bi bi-filter-right"></i></a>
+                        <nav
+                            class="md:mt-10 -ml-[500px] md:-ml-0 transition-all duration-200 md:block fixed md:relative left-0 top-0 bottom-0 bg-black min-w-[80%] p-4 md:p-0">
+                            <a href="javascript:void(0)" class="md:hidden float-end text-3xl close-mobile-menu"><i
+                                    class="bi bi-x-lg"></i></a>
+                            <ul class="py-11 md:py-0">
+                                <!-- Navigation Links -->
+                                <li class="py-3 font-medium"><a href="#section1"
+                                        class="text-xl text-gray-500 hover:text-[#f37b83] active">About Me</a></li>
+                                <li class="py-3 font-medium"><a href="#section2"
+                                        class="text-xl text-gray-500 hover:text-[#f37b83]">Research</a></li>
+                                <li class="py-3 font-medium"><a href="#section3"
+                                        class="text-xl text-gray-500 hover:text-[#f37b83]">News</a></li>
+                                <li class="py-3 font-medium"><a href="#section4"
+                                        class="text-xl text-gray-500 hover:text-[#f37b83]">Publications</a></li>
+                                <li class="py-3 font-medium"><a href="#section5"
+                                        class="text-xl text-gray-500 hover:text-[#f37b83]">Highlights</a></li>
+                                <li class="py-3 font-medium"><a href="#section6"
+                                        class="text-xl text-gray-500 hover:text-[#f37b83]">Projects</a></li>
+                                <li class="py-3 font-medium"><a href="#section7"
+                                        class="text-xl text-gray-500 hover:text-[#f37b83]">PoR & Volunteer
+                                        Experience</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="section-counter text-8xl font-bold hidden md:block" id="#current-section"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" ml-0 md:ml-96">
+            <section id="section1" class="py-10 md:py-20 section">
+                <div class="w-[100%] px-4 sm:px-14  flex flex-col justify-center items-center">
+                    <div class="relative">
+                        <h4 class=" text-xl md:text-3xl ">Hello! I'm</h4>
+                        <h1 class="text-[#ededed] text-4xl md:text-6xl font-bold -ml-3 md:-ml-10 absolute top-0 -z-10">
+                            Abhranil
+                            Chandra</h1>
+                        <div class="text-xl md:text-[42px] font-bold text-black my-5 md:leading-[50px]">
+                            Abhranil Chandra
+                            <span class="block text-[#f37b83]">
+                                An AI researcher focused on
+                                <a href="" class="typewrite " data-period="2000"
+                                    data-type='["Reinforcement Learning", "Foundation Models", "Decision Making", "Reasoning"]'>
+                                    <span class="">
+                                    </span>
+                                </a>
+                            </span>
+                            Innovation is my passion
+                        </div>
+                        <div>
+                            <p class="mb-2">I am a Research Masters (Thesis) student in Computer Science at the Cheriton
+                                School of
+                                Computer Science, University of Waterloo. I work under the supervision of Prof. Wenhu
+                                Chen
+                                and Prof. Sebastian Fischmeister. Most recently, I've been primary interested in topics
+                                around foundation models for decision making, reinforcement learning amd embodied AI,
+                                deep
+                                generative models and alignment.</p>
+                            <p class="mb-2">During my masters, I have been supported by a full academic ride from
+                                University of
+                                Waterloo, by the Mitacs Globalink Graduate Research Fellowship, and the International
+                                Master's Award of Excellence. I previously graduated with a B.Tech. in Mechanical
+                                Engineering with a minor in Mathematics and Computing and a micro-specialization in
+                                Aritificial Interlligence from IIT Kharagpur, where I worked on probabilistic machine
+                                learning, reinforcement learning and NLP advised by <a
+                                    href="https://scholar.google.co.in/citations?user=5bXSZPYAAAAJ&hl=en"
+                                    target="_blank" class="text-[#f37b83]">Prof. Pabitra Mitra</a> form the CSE
+                                Department of IIT Kharagpur. My undergraduate thesis was on Bayesian Uncertainty
+                                Estimation on Sensitive Data for Computer Vision Tasks using Bayesian Deep Learning.</p>
+                            <p class="mb-2">I am thankful to have spent two wonderful summers interning at <a
+                                    href="https://tlabs.ai/" target="_blank" class="text-[#f37b83]">ThoughtLabs Pvt.
+                                    Ltd.</a> as a Research
+                                Engineering working on scaling multimodal foundational models and improving fine-grained
+                                knowledge extraction from extremely long documents using Retrieval Augmented Generation
+                                (RAG) with <a href="https://www.linkedin.com/in/lokeshbathija/?originalSubdomain=in"
+                                    target="_blank" class="text-[#f37b83]">Lokesh Bhatija</a>, as a Mitacs Globalink
+                                Research Intern working on
+                                Continual Domain Generalization with <a
+                                    href="https://scholar.google.com/citations?user=qAZM5KcAAAAJ&hl=en" target="_blank"
+                                    class="text-[#f37b83]">Prof. Boyu Wang</a> in Vector Institute and Western
+                                University, and
+                                as a Research Intern at <a class="text-[#f37b83]"
+                                    href="https://wiki.umiacs.umd.edu/clip/index.php/Main_Page" target="_blank">CLIP
+                                    Lab</a> , University of Maryland Institute for Advanced
+                                Computer Studies (UMIACS), with <a
+                                    href="https://scholar.google.com/citations?user=BT4XTP4AAAAJ&hl=en" target="_blank"
+                                    class="text-[#f37b83]">Prof. Jordan Boyd-Graber</a> on improving Neural Question
+                                Answering
+                                Systems by leveraging self-supervised question generation.</p>
+                            <p>I have also working as a research assistant in the <a target="_blank"
+                                    class="text-[#f37b83]" href="https://irll.ca/"> Intelligent Robot Learning
+                                    Laboratory (IRL Lab)</a> of University of Alberta under
+                                <a target="_blank" class="text-[#f37b83]" href="https://drmatttaylor.net/">Prof. Matthew
+                                    E. Taylor</a> and <a target="_blank" class="text-[#f37b83]"
+                                    href="https://scholar.google.com/citations?user=kamjbL0AAAAJ&amp;hl=en">Manan
+                                    Tomar</a> on deep unsupervised represenation learning for RL, Offline RL and
+                                pre-training in RL to improve generalization and efficiency since 2022 to 2023.</p>
+                        </div>
+
+                        <h4 class="herr-von-muellerhoff-regular py-11 pb-10">Abhranil Chandra</h4>
+                        <div class="flex gap-3 md:gap-8 ">
+                            <a href="" class="flex flex-col justify-center items-center text-gray-400 text-sm">
+                                <i class="bi bi-envelope text-xl md:text-3xl "></i> Email
+                            </a>
+                            <a href="" class="flex flex-col justify-center items-center text-gray-400 text-sm">
+
+                                <i class="bi bi-file-earmark-pdf text-xl md:text-3xl"></i>
+                                CV
+                            </a>
+                            <a href="" class="flex flex-col justify-center items-center text-gray-400 text-sm">
+
+                                <i class="bi bi-linkedin text-xl md:text-3xl"></i>
+                                LinkedIn
+                            </a>
+                            <a href="" class="flex flex-col justify-center items-center text-gray-400 text-sm">
+
+                                <i class="bi bi-github text-xl md:text-3xl"></i>
+                                GitHub
+                            </a>
+                            <a href="" class="flex flex-col justify-center items-center text-gray-400 text-sm">
+                                <i class="bi bi-google text-xl md:text-3xl"></i>
+                                Google Scholar
+                            </a>
+                            <a target="_blank" href="https://abhranilc.blogspot.com" target="_blank"
+                                class="flex flex-col justify-center items-center text-gray-400 text-sm">
+                                <i class="bi bi-globe2 text-xl md:text-3xl"></i>
+                                Blog
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="section2" class="px-4 sm:px-14 py-10 md:py-20 bg-gray-100 section">
+                <h2 class="text-3xl md:text-5xl font-semibold mb-8 text-black">Research Interests</h2>
+                <p class="mb-2">I actively explore both theoretical frameworks and empirical findings via the lens of
+                    foundation
+                    models, RL and interactive learning, with specific research interests in:</p>
+                <div class="mb-8">
+                    <ul>
+                        <li class="py-3 flex gap-3">
+                            <i class="bi bi-arrow-right-circle-fill "></i> <span>Reinforcement Learning
+                                (robust RL, offline RL, IRL, RLHF)</span> </li>
+                        <li class="py-3 flex gap-3"><i class="bi bi-arrow-right-circle-fill"></i> <span>Foundation
+                                models for
+                                decision making and policy learning (generative models,
+                                representation)</span> </li>
+                        <li class="py-3 flex gap-3"><i class="bi bi-arrow-right-circle-fill"></i> <span>Improving
+                                planning and
+                                reasoning of foundation models to create interactive autonomous
+                                agents</span> </li>
+                        <li class="py-3 flex gap-3"><i class="bi bi-arrow-right-circle-fill"></i> <span>Science of
+                                Foundation
+                                Models</span></li>
+                    </ul>
+                </div>
+                <p>If you want to collaborate/have any questions feel free to shoot me an email. I am always interested
+                    in connecting with people.</p>
+            </section>
+            <section id="section3" class="px-4 sm:px-14 py-10 md:py-20 bg-white section">
+                <h2 class="text-3xl md:text-5xl font-semibold mb-8 text-black">News</h2>
+                <div class="gap-20">
+                    <div class="w-full news-full-box">
+                        <ul>
+                            <li class="py-3 border-b">
+                                <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [Feb
+                                    '24]</span>
+                                <div>
+                                    Started research collaboration with <a target="_blank"
+                                        href="https://sherryy.github.io/">Sherry
+                                        Yang</a> at Google DeepMind on
+                                    Interactive Video Generation Models as World Models as part of my thesis
+                                    research.
+                                </div>
+                            </li>
+                            <li class="py-3 border-b">
+                                <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [Dec
+                                    '23]</span>
+                                <div> Our paper DiffClone won best paper and workshop competition winner award
+                                    at the TOTO Workshop, NeurIPS 2023.</div>
+                            </li>
+                            <li class="py-3 border-b">
+                                <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [Oct
+                                    '23]</span>
+                                <div> Our project "A Human-Aligned Automated Evaluation Framework for Natural
+                                    Language Generation via Large Language Models" got accpeted for the <a
+                                        target="_blank"
+                                        href="https://www.microsoft.com/en-us/research/collaboration/accelerating-foundation-models-research/phase-ii/">
+                                        Accelerating Foundation Models Research</a> grant by Microsoft Research.</div>
+                            </li>
+                            <li class="py-3 border-b">
+                                <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [Oct
+                                    '23]</span>
+                                <div> Started as a part-time Student Researcher at <a target="_blank"
+                                        href="https://www.palitronica.com/"> Palitronica Inc</a>.</div>
+                            </li>
+                            <li class="py-3 border-b">
+                                <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [Sep
+                                    '23]</span>
+                                <div> Received Mitacs Globalink Graduate Research Fellowship and International
+                                    Master's Award of Excellence at UWaterloo to support my graduate research besides
+                                    full academic ride from UWaterloo.</div>
+                            </li>
+                        </ul>
+
+
+                        <div class="news-more hidden">
+                            <ul>
+                                <li class="py-3 border-b">
+                                    <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [Sep
+                                        '23]</span>
+                                    <div> Joined David R. Cheriton School of Computer Science at University of
+                                        Waterloo as a graduate student and started as a RA and TA.</div>
+                                </li>
+                                <li class="py-3 border-b">
+                                    <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [May
+                                        '23]</span>
+                                    <div> Submitted our work <a target="_blank"
+                                            href="https://arxiv.org/pdf/2210.06599.pdf">You
+                                            Make me Feel like a Natural Question: Training QA Systems on Transformed
+                                            Trivia
+                                            Questions</a> in EMNLP 2023 conference.</div>
+                                </li>
+                                <li class="py-3 border-b">
+                                    <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i>
+                                        [May'23]</span>
+                                    <div> Stared as Research Engineering Intern at ThoughtLabs Pvt. Ltd. working on
+                                        RAG enhanced LLMs.</div>
+                                </li>
+                                <li class="py-3 border-b">
+                                    <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [May
+                                        '23]</span>
+                                    <div> Graduated for IIT Kharagpur with a B.Tech. degree majoring in Mechanical
+                                        Engineering, with a minor in Maths and Computing and a micro-specialization in
+                                        AI.
+                                    </div>
+                                </li>
+                                <li class="py-3">
+                                    <span class="font-medium flex gap-2"><i class="bi bi-calendar2-week"></i> [Apr
+                                        '23]</span>
+                                    <div> Got MS in CS admits in top CS departments like University of Waterloo,
+                                        University of Alberta, ASU.</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text-end">
+                            <a href="javascrit:void(0)"
+                                class="text-2xl text-[#f37b83] new-more-button"><span>More</span> <i
+                                    class="bi bi-arrow-right-circle"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section id="section4" class="px-4 sm:px-14 py-10 md:py-20 bg-gray-100 section">
+                <h2 class="text-3xl md:text-5xl font-semibold mb-8 text-black">Publications and Thesis</h2>
+                <p>(* denotes equal contribution, ** denotes equal contribution and co-first authorship)</p>
+                <div class="md:flex gap-5 py-9 border-b items-start">
+                    <div class="md:w-[380px]">
+                        <img src="assets/images/in-persion.jpg" class="img-fluid h-full w-full object-cover" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-2xl"><a href="javascript:void();" class="text-[#f37b83] pub-title">VideoEval:
+                                Training
+                                Multimodal Language Models for Multi-aspect Evaluation of Video Generation
+                                Models</a></h3>
+                        <h5 class="font-medium text-xl">Xuan He, Dongfu Jiang, Ge Zhang, Max Ku,Abhranil
+                            Chandra et.al.</h5>
+                        <p>In Preperation</p>
+                        <div class="flex gap-3 py-2">
+                            <a href="javascript:void(0)"
+                                class="bg-[#f37b83] px-4  rounded-sm text-white disabled opacity-50 cursor-not-allowed">Paper</a>
+                        </div>
+                        <p class="mb-2">TL;DR: We introduce a large-scale video evaluation dataset and benchmark, and
+                            present a VideoEval model that significantly outperforms GPT-4o in assessing video
+                            generation quality. <a href="javascript:void(0)"
+                                class="pub-title text-[#f37b83] down-arrow">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a>
+                        </p>
+                        <div class="full-desc hidden">
+                            We collect 49K video evaluation data with multi-aspect subscores. Based on the collected
+                            data, we also released a video evaluation benchmark with 800 examples, along with a training
+                            dataset with 48K. We trained a local evaluator based on to automatically evaluate the
+                            quality of video generation models. Experiments show that our VideoEval model surpasses
+                            GPT-4o by a large margin, demonstrating it's strong ability as a video generation evaluator.
+                            All the codes and dataset will be released after the review process.
+                        </div>
+                    </div>
+                </div>
+                <div class="md:flex gap-5 py-9 border-b items-start">
+                    <div class="md:w-[380px]">
+                        <img src="assets/images/transformed-trivia.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-2xl"><a href="javascript:void(0)" class="text-[#f37b83] pub-title">You Make me
+                                Feel like a Natural Question: Training QA Systems on Transformed Trivia Questions</a>
+                        </h3>
+                        <h5 class="font-medium text-xl">Tasnim Kabir, Saptarashmi Bandyopadhyay, Yoo Yeon Sung, Hao
+                            Zou*, Abhranil Chandra*, Jordan Lee Boyd-Graber</h5>
+                        <p>In Preperation</p>
+                        <div class="flex gap-3 py-2">
+                            <a href="javascript:void(0)" class="bg-[#f37b83] px-4  rounded-sm text-white opacity-50 cursor-not-allowed">Paper</a>
+                        </div>
+                        <p class="mb-2">TL;DR: We propose a method to generate concise, web query-style natural
+                            questions from trivia data to train QA systems, offering a cost-effective alternative to
+                            expensive, hard-to-annotate synthetic datasets. <a href="javascript:void(0)"
+                                class="pub-title text-[#f37b83] down-arrow">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a></p>
+
+                        <div class="full-desc hidden">
+                            Training question answering (QA) and information retrieval systems for web queries require
+                            large, expensive datasets that are difficult to annotate and time-consuming to gather.
+                            Moreover, while natural datasets of information-seeking questions are often prone to
+                            ambiguity or ill-formed, there are troves of freely available, carefully crafted question
+                            datasets for many languages. Thus, we automatically generate shorter, information-seeking
+                            questions, resembling web queries in the style of the Natural Questions NQ dataset from
+                            longer trivia data. Training a QA system on these transformed questions is a viable strategy
+                            for alternating to more expensive training setups and contrasting the final systems.
+                        </div>
+                    </div>
+                </div>
+                <div class="md:flex gap-5 py-9 border-b items-start">
+                    <div class=" md:w-[380px]">
+                        <img src="assets/images/generative-simulators.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-2xl"><a href="javascript:void(0)"
+                                class="text-[#f37b83] pub-title">Self-Improving Generative Simulators</a></h3>
+                        <h5 class="font-medium text-xl">Abhranil Chandra et.al.</h5>
+                        <p>Under Review</p>
+                        <div class="flex gap-3 py-2">
+                            <a href="javascript:void(0)" class="bg-[#f37b83] px-4  rounded-sm text-white opacity-50 cursor-not-allowed">Paper</a>
+                        </div>
+                        <p class="mb-2">TL;DR: We present SI-GenSim, a framework that enhances video-based policy models
+                            with diverse feedback mechanisms, significantly reducing inaccuracies like hallucinations
+                            and improving performance in real-world tasks such as robotic manipulation. <a
+                                href="javascript:void(0)" class="pub-title text-[#f37b83] down-arrow">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a></p>
+
+                        <div class="full-desc hidden">
+                            Generative simulators that model real-world dynamics from extensive internet video data have
+                            significant potential in domains such as movie production, augmented reality, autonomous
+                            driving, and robotics. A major limitation in these learned simulators is the quality of
+                            generated videos, which often suffer from inaccuracies such as hallucinatory content and
+                            unrealistic physics. These issues prevent the direct application of generative simulators
+                            for downstream tasks like controlling robots or interacting with human users. While scaling
+                            up data in terms of dataset size and quality, and models in terms of parameters, provides a
+                            partial solution, integrating external feedback is essential for grounding generative models
+                            in the real world, as demonstrated by the success of language models with human feedback. In
+                            this work, we investigate various feedback mechanisms to reduce such inaccuracies and
+                            enhance video-based generative simulators, including self-play, feedback from
+                            vision-language models, and real-world feedback from robotic operations. We introduce
+                            Self-Improving Generative Simulators (SI-GenSim), a novel framework that iteratively refines
+                            video generation based on diverse feedback sources. Our experiments show that SI-GenSim
+                            drastically reduces the rate of hallucination in frame-conditioned action simulation, and
+                            boosts performance on downstream robotic manipulation tasks.
+                        </div>
+                    </div>
+                </div>
+                <div class="md:flex gap-5 py-9 border-b items-start">
+                    <div class=" md:w-[380px]">
+                        <img src="assets/images/NLG-evaluation-reasoning.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-2xl"><a href="javascript:void(0)"
+                                class="text-[#f37b83] pub-title">Review-Feedback-Reason (ReFeR): A Novel Framework for
+                                NLG Evaluation & Reasoning</a></h3>
+                        <h5 class="font-medium text-xl">Yaswanth Narsupalli**, Abhranil Chandra**, Sreevatsa Muppirala,
+                            Manish Gupta, Pawan Goyal</h5>
+                        <p>Under Review</p>
+                        <div class="flex gap-3 py-2">
+                            <a href="javascript:void(0)" class="bg-[#f37b83] px-4  rounded-sm text-white opacity-50 cursor-not-allowed">Paper</a>
+                        </div>
+                        <p class="mb-2">TL;DR: We introduce ReFeR, a novel NLG evaluation framework inspired by peer
+                            review, which significantly enhances evaluation accuracy and reasoning benchmarks,
+                            outperforming current methods and enabling smaller models to match or exceed bigger models
+                            performance. <a href="javascript:void(0)" class="pub-title text-[#f37b83] down-arrow">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a></p>
+
+                        <div class="full-desc hidden">
+                            Assessing the quality of Natural Language Generation (NLG) outputs, such as those produced
+                            by large language models (LLMs), poses significant challenges. Traditional approaches
+                            involve either resource-intensive human evaluations or automatic metrics, which often
+                            exhibit a low correlation with human judgment. In this study, we propose a novel evaluation
+                            framework called Review-Feedback-Reason (ReFeR) for NLG using LLM Agents, drawing
+                            inspiration from the academic peer review process. Our approach has been rigorously tested
+                            across three pre-existing benchmark datasets on diverse NLG tasks. We have annotated a
+                            dataset for evaluating reasoning to provide a comprehensive assessment and help the
+                            community evaluate reasoning tasks better. This framework not only enhances the accuracy of
+                            NLG evaluation, surpassing previous benchmarks by approximately 20%, but also generates
+                            constructive feedback and significantly improves the reasoning benchmark. This feedback
+                            facilitates the creation of instruction-tuning datasets, which, when used to fine-tune
+                            smaller models like Mistral-7B, making them extremely good evaluators, yielding results
+                            double the correlation with human evaluations and performance nearly on par with GPT-3.5. We
+                            highlight the effectiveness of our methodology through its application in the reasoning
+                            benchmark, where it achieved an 87% accuracy rate, outperforming most current
+                            state-of-the-art scores and the reasoning capabilities of models like Gemini Pro by 13%. We
+                            believe our framework offers a versatile solution for improving reasoning, providing
+                            feedback, and evaluating various generative tasks.
+                        </div>
+                    </div>
+                </div>
+                <div class="md:flex gap-5 py-9 border-b items-start">
+                    <div class=" md:w-[380px]">
+                        <img src="assets/images/MMLU.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-2xl"><a href="javascript:void(0)" class="text-[#f37b83] pub-title">MMLU-Pro: A
+                                More Robust and Challenging Multi-Task Language Understanding Benchmark</a></h3>
+                        <h5 class="font-medium text-xl">Yubo Wang*, Xueguang Ma*, Ge Zhang, Yuansheng Ni, Abhranil
+                            Chandra et.al.</h5>
+                        <p>Under Review</p>
+                        <div class="flex gap-3 py-2">
+                            <a href="https://arxiv.org/pdf/2406.01574" target="_blank"
+                                class="bg-[#f37b83] px-4  rounded-sm text-white">Paper</a>
+                        </div>
+                        <p class="mb-2">TL;DR: We introduce MMLU-Pro, an enhanced benchmark that raises the challenge
+                            for language models with more complex reasoning questions and expanded choices, offering
+                            better discrimination of model capabilities and reducing prompt sensitivity compared to the
+                            original MMLU. <a href="javascript:void(0)" class="pub-title text-[#f37b83] down-arrow">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a></p>
+                        <div class="full-desc hidden">
+                            In the age of large-scale language models, benchmarks like the Massive Multitask Language
+                            Understanding (MMLU) have been pivotal in pushing the boundaries of what AI can achieve in
+                            language comprehension and reasoning across diverse domains. However, as models continue to
+                            improve, their performance on these benchmarks has begun to plateau, making it increasingly
+                            difficult to discern differences in model capabilities. This paper introduces MMLU-Pro, an
+                            enhanced dataset designed to extend the mostly knowledge-driven MMLU benchmark by
+                            integrating more challenging, reasoning-focused questions and expanding the choice set from
+                            four to ten options. Additionally, MMLU-Pro eliminates the trivial and noisy questions in
+                            MMLU. Our experimental results show that MMLU-Pro not only raises the challenge, causing a
+                            significant drop in accuracy by 16% to 33% compared to MMLU but also demonstrates greater
+                            stability under varying prompts. With 24 different prompt styles tested, the sensitivity of
+                            model scores to prompt variations decreased from 4-5% in MMLU to just 2% in MMLU-Pro.
+                            Additionally, we found that models utilizing Chain of Thought (CoT) reasoning achieved
+                            better performance on MMLU-Pro compared to direct answering, which is in stark contrast to
+                            the findings on the original MMLU, indicating that MMLU-Pro includes more complex reasoning
+                            questions. Our assessments confirm that MMLU-Pro is a more discriminative benchmark to
+                            better track progress in the field.
+                        </div>
+                    </div>
+                </div>
+                <div class="md:flex gap-5 py-9 border-b items-start">
+                    <div class=" md:w-[380px]">
+                        <img src="assets/images/DiffClone.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-2xl"><a href="javascript:void(0)" class="text-[#f37b83] pub-title">DiffClone:
+                                Enhanced Behaviour Cloning in Robotics with Diffusion-Driven Policy Learning</a></h3>
+                        <h5 class="font-medium text-xl">Sabariswaran Mani, Abhranil Chandra*, Sreyas Venkataraman*,
+                            Adyan Rizvi, Yash Sirvi, Soumojit Bhattacharya, Aritra Hazra</h5>
+                        <p>TOTO Workshop @ NeurIPS 2023</p>
+                        <div class="flex gap-3 py-2">
+                            <a href="https://arxiv.org/pdf/2401.09243v2" target="_blank"
+                                class="bg-[#f37b83] px-4  rounded-sm text-white">Paper</a>
+                        </div>
+                        <p class="mb-2">TL;DR: We introduce DiffClone, a diffusion-based behavior cloning agent
+                            evaluated on real robots, showing its effectiveness with offline training on the TOTO
+                            Benchmark and highlighting the superior performance of MOCO finetuned ResNet50 in visual
+                            representation. <a href="javascript:void(0)" class="pub-title text-[#f37b83] down-arrow">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a></p>
+                        <div class="full-desc hidden">
+                            Robot learning tasks are extremely compute-intensive and hardware-specific. Thus the avenues
+                            of tackling these challenges, using a diverse dataset of offline demonstrations that can be
+                            used to train robot manipulation agents, is very appealing. The Train-Offline-Test-Online
+                            (TOTO) Benchmark provides a well-curated open-source dataset for offline training comprised
+                            mostly of expert data and also benchmark scores of the common offline-RL and behaviour
+                            cloning agents. In this paper, we introduce DiffClone, an offline algorithm of enhanced
+                            behaviour cloning agent with diffusion-based policy learning, and measured the efficacy of
+                            our method on real online physical robots at test time. We experimented with both
+                            pre-trained visual representation and agent policies. In our experiments, we find that MOCO
+                            finetuned ResNet50 performs the best in comparison to other finetuned representations. Goal
+                            state conditioning and mapping to transitions resulted in a minute increase in the success
+                            rate and mean-reward. As for the agent policy, we developed DiffClone, a behaviour cloning
+                            agent improved using conditional diffusion.
+                        </div>
+                    </div>
+                </div>
+                <div class="md:flex gap-5 py-9 border-b items-start">
+                    <div class=" md:w-[380px]">
+                        <img src="assets/images/CABACE.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-2xl"><a href="javascript:void(0)" class="text-[#f37b83] pub-title">CABACE:
+                                Injecting Character Sequence Information and Domain Knowledge forEnhanced Acronym and
+                                Long-Form Extraction</a></h3>
+                        <h5 class="font-medium text-xl">Nithish Kannen, Divyanshu Seth, Abhranil Chandra, Subhraneel Pal
+                        </h5>
+                        <p>SDU Workshop at AAAI 2022</p>
+                        <div class="flex gap-3 py-2">
+                            <a target="_blank"
+                                href="https://drive.google.com/file/d/1RC2qfAr0Ju049k44M6_YAE-maYhOWGsP/view?usp=sharing"
+                                class="bg-[#f37b83] px-4  rounded-sm text-white">Paper</a>
+                            <a target="_blank" href="https://arxiv.org/abs/2110.04475"
+                                class="bg-[#f37b83] px-4  rounded-sm text-white">Code</a>
+                        </div>
+                        <p class="mb-2">TL;DR: We present CABACE, a Character-Aware BERT framework designed for acronym
+                            extraction in scientific and legal texts, outperforming baselines and demonstrating strong
+                            zero-shot generalization to non-English languages. <a href="javascript:void(0)"
+                                class="pub-title text-[#f37b83] down-arrow">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a></p>
+                        <div class="full-desc hidden">
+                            Acronyms and long-forms are a common sight in research documents in general, more so in
+                            documents from scientific and legal domains. Many of the acronyms used in these documents
+                            are domain-specific, and are very rarely foundin normal text corpora. Owing to this,
+                            transformer-based NLP models suffer, detecting OOV (Out of Vocabulary) for acronym tokens
+                            and their performance suffers while linking acronyms to their long forms during extraction.
+                            To resolve these we propose a novel framework CABACE:Character-Aware BERT for ACronym
+                            Extraction, that takes into account character sequences in text, and is adapted to the
+                            scientific and legal domains by masked language modelling. We further use an objective
+                            function with augmented loss function, adding mask+ max loss for training CABACE.
+                            Experimental results provethe superiority of the proposed framework in comparison tovarious
+                            baselines. Additionally, we show that the proposed framework is better suited than baseline
+                            models for zero-shot generalization to non-English languages, thus reinforcing the
+                            effectiveness of our approach.
+                        </div>
+                    </div>
+                </div>
+                <div class="md:flex gap-5 pt-9  items-start">
+                    <div class="md:w-[380px]">
+                        <img src="assets/images/leveraging.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h3 class="text-2xl"><a href="javascript:void(0)" class="text-[#f37b83] pub-title">Leveraging
+                                recent advances in Pre-Trained Language Models for Eye-Tracking Prediction</a></h3>
+                        <h5 class="font-medium text-xl">Varun Madhavan*, Aditya Girish Pawate*, Shraman Pal*, Abhranil
+                            Chandra*</h5>
+                        <p>CMCL Workshop at NAACL 2021</p>
+                        <div class="flex gap-3 py-2">
+                            <a target="_blank" href="https://arxiv.org/abs/2110.04475"
+                                class="bg-[#f37b83] px-4  rounded-sm text-white">Paper</a>
+                            <a target="_blank"
+                                href="https://github.com/abhranilchandra/CMCL-2021-Predicting-human-reading-patterns"
+                                class="bg-[#f37b83] px-4  rounded-sm text-white">Code</a>
+                        </div>
+                        <p class="mb-2">TL;DR: We introduce a novel architecture combining RoBERTa and a
+                            transformer-based model to predict eye-gaze features for each word in a sentence, using ZuCo
+                            datasets to explore cognitive-inspired NLP for better language processing. <a
+                                href="javascript:void(0)" class="pub-title text-[#f37b83] down-arrow">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a></p>
+                        <div class="full-desc hidden">
+                            Cognitively inspired Natural Language Pro-cessing uses human-derived behavioral datalike
+                            eye-tracking data, which reflect the semantic representations of language in the human brain
+                            to augment the neural nets to solve arange of tasks spanning syntax and semanticswith the
+                            aim of teaching machines about language processing mechanisms. In this paper,we use the ZuCo
+                            1.0 and ZuCo 2.0 dataset containing the eye-gaze features to explore different linguistic
+                            models to directly predict these gaze features for each word with respect to its sentence.
+                            We devised a novel architecture consisting of RoBERTa Token Classifier with a dense layer on
+                            top for language modeling and a stand-alone model consisting of dense layers followed by a
+                            transformer layer for the extra features we engineered. Finally,we took the mean of the
+                            outputs of both these models to make the final predictions.
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <section id="section5" class="px-4 sm:px-14 py-10 md:py-20 section">
+                <h2 class="text-3xl md:text-5xl font-semibold mb-8 text-black">Highlights</h2>
+                <div class="md:flex gap-8 items-center py-11 border-b border-gray-500 ">
+                    <div class="md:w-96">
+                        <img src="assets/images/UMIACS.png" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h4 class="text-2xl font-medium ">Summer Research Intern</h4>
+                        <h5 class="font-medium mb-4"> Mentor(s):
+                            <a class="text-[#f37b83]" target="_blank"
+                                href="https://scholar.google.com/citations?user=BT4XTP4AAAAJ&amp;hl=en"> Prof. Jordan
+                                Boyd-Graber</a> and
+                            <a class="text-[#f37b83]" target="_blank"
+                                href="https://scholar.google.co.in/citations?user=UqTGV4gAAAAJ&amp;hl=en"> Saptarashmi
+                                Bandopadhyay</a></h5>
+                        Working on improving different sate-of-the-art question answering systems like DrQA, RAG, R2D2
+                        by using machine translation and seq-to-seq language generation to augment existing QA datasets
+                        and converting one dataset content into another thus creating bigger and better datasets.
+                    </div>
+                </div>
+                <div class="md:flex gap-8 items-center py-11">
+                    <div class="md:w-96">
+                        <img src="assets/images/SketchX.jpg" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h4 class="text-2xl font-medium">Research Intern</h4>
+                        <h5 class="font-medium mb-4"> Mentor(s):
+                            <a class="text-[#f37b83]"
+                                href="https://scholar.google.com/citations?user=irZFP_AAAAAJ&amp;hl=en">Prof. Yi-Zhe
+                                Song</a> and
+                            <a class="text-[#f37b83]"
+                                href="https://scholar.google.com/citations?user=gjslbzsAAAAJ&amp;hl=en">Ayan Kumar
+                                Bhunia</a></a></h5>
+                        Working on improving different sate-of-the-art question answering systems like DrQA, RAG, R2D2
+                        by using machine translation and seq-to-seq language generation to augment existing QA datasets
+                        and converting one dataset content into another thus creating bigger and better datasets.
+                    </div>
+                </div>
+                <div class="md:flex gap-8 items-center py-11">
+                    <div class="md:w-96">
+                        <img src="assets/images/UoTurku.png" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h4 class="text-2xl font-medium">Research Intern</h4>
+                        <h5 class="font-medium mb-4"> Mentor(s):
+                            <a class="text-[#f37b83]"
+                                href="https://scholar.google.com/citations?user=irZFP_AAAAAJ&amp;hl=en">Prof. Yi-Zhe
+                                Song</a> and
+                            <a class="text-[#f37b83]"
+                                href="https://scholar.google.com/citations?user=gjslbzsAAAAJ&amp;hl=en">Ayan Kumar
+                                Bhunia</a></a></h5>
+                        Working on improving different sate-of-the-art question answering systems like DrQA, RAG, R2D2
+                        by using machine translation and seq-to-seq language generation to augment existing QA datasets
+                        and converting one dataset content into another thus creating bigger and better datasets.
+                    </div>
+                </div>
+
+            </section>
+            <section id="section6" class="px-4 sm:px-14 py-10 md:py-20 bg-gray-100 section">
+                <h2 class="text-3xl md:text-5xl font-semibold mb-8 text-black">Selected Projects</h2>
+                <div class="container">
+                    <div>
+                        <ul>
+                            <li>
+                                <h4 class="text-2xl font-medium">Long Video Generation <small>(In preparation for a <a
+                                            href="" class="text-[#f37b83]">paper</a> | <a href=""
+                                            class="text-[#f37b83]">Code</a>)</small> </h4>
+                                <h5 class="text-xl mb-3">CS886: Foundation Models | Supervisor: <a
+                                        href="https://wenhuchen.github.io/index.html" target="_blank"
+                                        class="text-[#f37b83]">Prof. Wenhu Chen</a></h5>
+                                <p>Generating long-format videos with high temporal coherence remains a challeng- ing
+                                    task for current state-of-the-art models. Existing approaches often focus on image
+                                    quality rather than temporal consistency, resulting in short video sequences with
+                                    limited coherence. In this work, we try to alleviate a novel framework for learning
+                                    better noise priors for consistent long video generation. Our approach inte- grates
+                                    advanced noise conditioning techniques with state-of-the-art video extension
+                                    methodologies to enhance temporal coherence and fidelity. Leveraging insights from
+                                    recent advancements in noise modeling and video extension, we introduce a
+                                    model-agnostic scheme that seamlessly integrates with existing text-to-video
+                                    diffusion techniques. Specifically, we refine noise priors to capture temporal cor-
+                                    relations and extend videos by adaptively conditioning on the generated frames and
+                                    noise priors. We demonstrate the efficacy of our approach through extensive
+                                    experimentation, showcasing significant improvements in temporal coherence and video
+                                    fidelity. Our framework offers a scalable solution for generating long-format videos
+                                    using diffusion models, contributing to the advancement of video synthesis
+                                    techniques.</p>
+                            </li>
+                            <li class="py-8">
+                                <h4 class="text-2xl font-medium">Air Quality Forecasting using Neural Networks
+                                    <small>(<a
+                                            href="file:///C:/Users/kolcy/Downloads/abhranilchandra.github.io-main/abhranilchandra.github.io-main/data/Air%20Quality%20Forecasting%20using%20Neural%20Networks.pdf">Report</a>
+                                        | <a href="https://github.com/abhranilchandra/AirQualityForecastingAI60002"
+                                            target="_blank">Code</a> )</small> </h4>
+                                <h5 class="text-xl mb-3">ML for Earth System Sciences Term Paper | Supervisor: <a
+                                        href="https://sites.google.com/site/adwayresearch/" target="_blank"
+                                        class="text-[#f37b83]">Prof. Adway Mitra</a></h5>
+                                <p>Surveyed multiple papers on deep neural networks for air quality prediction. Methods
+                                    like ANNs, LSTMs, GRUs were implemented and tested on the standard datasets. Besides
+                                    we also implemented the state of the art time-series model called Prophet Net which
+                                    out-performed all the other baselines.</p>
+                            </li>
+                            <li class="py-8">
+                                <h4 class="text-2xl font-medium">Motion Planning of Articulated Robot Arm using
+                                    Reinforcement Learning <small>(<a
+                                            href="file:///C:/Users/kolcy/Downloads/abhranilchandra.github.io-main/abhranilchandra.github.io-main/data/Motion%20Planning%20of%20Articulated%20Robot%20Arm%20using%20DDPG%20and%20HER.pdf">Report</a>
+                                        | <a href="https://github.com/abhranilchandra/AI61009-AI4Manufacturing-Term-Project"
+                                            target="_blank">Code</a> )</small> </h4>
+                                <h5 class="text-xl mb-3">AI for Manufacturing Term Project | Supervisor: <a
+                                        href="https://scholar.google.co.in/citations?hl=en&user=k7aXzYoAAAAJ&view_op=list_works&sortby=pubdate"
+                                        target="_blank">Prof. Cheruvu Siva Kumar</a></h5>
+                                <p>Designed and implementated the DDPG algorithm with HER to train the Fetch-Reacher
+                                    agent of OpenAI gym.</p>
+                            </li>
+                            <li class="py-8">
+                                <h4 class="text-2xl font-medium">Electric Vehicle Routing and Path-lanning <small>
+                                        <a href="https://github.com/abhranilchandra/Artificial-Intelligence"
+                                            target="_blank" class="text-[#f37b83]">Code</a></small> </h4>
+                                <h5 class="text-xl mb-3">Artificial Intelligence Foundations and Applications Term
+                                    Project | Course Instructor: <a
+                                        href="https://scholar.google.fi/citations?user=yq-ekN8AAAAJ&hl=en"
+                                        target="_blank" class="text-[#f37b83]">Prof. Partha Pratim Chakrabarti</a> and
+                                    <a href="http://www.ai.iitkgp.ac.in/People/profile/?name=arijit" target="_blank"
+                                        class="text-[#f37b83]">Prof. Arijit Mondal</a></h5>
+                                <p>Used path planning graph based algorithms to route all the vehicles from their
+                                    respective sources to destinations such that max time is minimized.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+            <section id="section7" class="px-4 sm:px-14 py-10 md:py-20 section">
+
+                <h2 class="text-3xl md:text-5xl font-semibold mb-8 text-black">Positions Of Responsibility & Volunteer
+                    Experience</h2>
+                <div class="md:flex gap-8 items-center py-11 border-b border-gray-500 ">
+                    <div class="md:w-44">
+                        <img src="assets/images/kdag.png" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h4 class="text-2xl font-medium ">Senior Member (Jun '21 - current), Junior Member (Oct '20
+                            - Jun '21)</h4>
+                        <h5 class="font-medium mb-4">
+                            <a target="_blank" href="https://www.facebook.com/kgpdag/" class="text-[#f37b83]">Kharagpur
+                                Data Analytics Group (KDAG), IIT Kharagpur</a>
+                        </h5>
+                        <div>
+                            <p class="text-[#f37b83]"><a
+                                    href="https://github.com/Kharagpur-Data-Analytics-Group/reading-sessions"
+                                    target="_blank">GitHub Repo for Reading Sessions</a></p>
+                            Organized research paper-reading sessions for students of IIT Kharagpur. Conducted Data
+                            Science and ML workshop for more than 600 registered students. The KDAG is a group of
+                            students enthusiastic about Data Science and Machine Learning, along with its
+                            applications.
+                        </div>
+                    </div>
+                </div>
+                <div class="md:flex gap-8 items-center py-11 border-b border-gray-500 ">
+                    <div class="md:w-44">
+                        <img src="assets/images/NSS-symbol.jpeg" class="max-w-full" alt="">
+                    </div>
+                    <div class="w-full">
+                        <h4 class="text-2xl font-medium ">NSS Volunteer (Jun '19 - current)</h4>
+                        <h5 class="font-medium mb-4">
+                            <a target="_blank" href="https://www.facebook.com/nss.iitkgp/"
+                                class="text-[#f37b83]">Institute Wellness Group (IWG), IIT Kharagpur</a>
+                        </h5>
+                        <div>
+                            Teach underprivileged kids in nearby villages of IIT Kharagpur the basics of English,
+                            Maths and Computing. Conducted surveys about how to improve the education system in
+                            village schools, and worked on cleanliness drives.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<script src="assets/js/owl.carousel.js"></script>
+<script src="assets/js/script.js"></script>
+
+</html>
