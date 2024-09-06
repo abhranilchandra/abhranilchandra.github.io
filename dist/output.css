@@ -641,8 +641,8 @@ video {
   margin-left: -0.75rem;
 }
 
-.-ml-\[500px\] {
-  margin-left: -500px;
+.-ml-\[100\%\] {
+  margin-left: -100%;
 }
 
 .mb-2 {
@@ -671,10 +671,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.-ml-\[100\%\] {
-  margin-left: -100%;
 }
 
 .block {
@@ -721,11 +717,6 @@ video {
   cursor: not-allowed;
 }
 
-.columns-6 {
-  -moz-columns: 6;
-       columns: 6;
-}
-
 .flex-row {
   flex-direction: row;
 }
@@ -768,10 +759,6 @@ video {
 
 .gap-8 {
   gap: 2rem;
-}
-
-.gap-1 {
-  gap: 0.25rem;
 }
 
 .overflow-hidden {
@@ -891,10 +878,6 @@ video {
 
 .text-end {
   text-align: end;
-}
-
-.font-serif {
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 .text-2xl {
@@ -1066,10 +1049,6 @@ nav a.active {
     display: block;
   }
 
-  .sm\:hidden {
-    display: none;
-  }
-
   .sm\:px-14 {
     padding-left: 3.5rem;
     padding-right: 3.5rem;
@@ -1077,28 +1056,8 @@ nav a.active {
 }
 
 @media (min-width: 768px) {
-  .md\:fixed {
-    position: fixed;
-  }
-
-  .md\:relative {
-    position: relative;
-  }
-
-  .md\:-ml-0 {
-    margin-left: -0px;
-  }
-
   .md\:-ml-10 {
     margin-left: -2.5rem;
-  }
-
-  .md\:ml-96 {
-    margin-left: 24rem;
-  }
-
-  .md\:mt-10 {
-    margin-top: 2.5rem;
   }
 
   .md\:block {
@@ -1109,28 +1068,12 @@ nav a.active {
     display: flex;
   }
 
-  .md\:hidden {
-    display: none;
-  }
-
-  .md\:h-\[130px\] {
-    height: 130px;
-  }
-
-  .md\:h-screen {
-    height: 100vh;
-  }
-
   .md\:w-44 {
     width: 11rem;
   }
 
   .md\:w-96 {
     width: 24rem;
-  }
-
-  .md\:w-\[130px\] {
-    width: 130px;
   }
 
   .md\:w-\[380px\] {
@@ -1141,25 +1084,8 @@ nav a.active {
     flex-direction: row;
   }
 
-  .md\:flex-col {
-    flex-direction: column;
-  }
-
-  .md\:items-center {
-    align-items: center;
-  }
-
-  .md\:gap-8 {
-    gap: 2rem;
-  }
-
-  .md\:p-0 {
-    padding: 0px;
-  }
-
-  .md\:py-0 {
-    padding-top: 0px;
-    padding-bottom: 0px;
+  .md\:justify-start {
+    justify-content: flex-start;
   }
 
   .md\:py-20 {
@@ -1200,12 +1126,12 @@ nav a.active {
     position: relative;
   }
 
-  .lg\:ml-96 {
-    margin-left: 24rem;
-  }
-
   .lg\:-ml-0 {
     margin-left: -0px;
+  }
+
+  .lg\:ml-96 {
+    margin-left: 24rem;
   }
 
   .lg\:mt-10 {
@@ -1220,12 +1146,12 @@ nav a.active {
     display: none;
   }
 
-  .lg\:h-screen {
-    height: 100vh;
-  }
-
   .lg\:h-\[130px\] {
     height: 130px;
+  }
+
+  .lg\:h-screen {
+    height: 100vh;
   }
 
   .lg\:w-96 {
@@ -1259,11 +1185,5 @@ nav a.active {
   .lg\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .xl\:gap-8 {
-    gap: 2rem;
   }
 }
