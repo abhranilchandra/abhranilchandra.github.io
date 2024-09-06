@@ -7,13 +7,13 @@ $(function () {
 
     $('.close-mobile-menu').on('click', function () {
         $('nav').css({
-            'margin-left': '-500px'
+            'margin-left': '-100%'
         })
     });
     $('nav a').on('click', function () {
         if ($(window).width() < 1024) {
             $('nav').css({
-                'margin-left': '-500px'
+                'margin-left': '-100%'
             });
         }
     });
