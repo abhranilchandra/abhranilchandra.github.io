@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="VideoAgent Blog — Abhranil Chandra">
+    <meta name="author" content="Abhranil Chandra">
+    <meta name="theme-color" content="#222222">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/nicons/favicon-32x32.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Marked.js: Compiler to render Markdown in the browser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <title>VideoAgent: Self-Improving Video World Models</title>
+    
+    <style>
+        /* Markdown specific styles */
+        #content h1 { font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.5rem; margin-top: 0; }
+        #content h2 { margin-top: 2rem; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 600; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+        #content h3 { margin-top: 1.5rem; font-size: 1.25rem; font-weight: 600; }
+        #content p { margin-bottom: 1.2rem; font-size: 1.1rem; line-height: 1.7; color: #333; }
+        #content blockquote { border-left: 4px solid #333; padding: 1rem 1.5rem; margin: 2rem 0; background: #f8f9fa; font-style: italic; color: #555; }
+        #content img { max-width: 100%; border-radius: 8px; margin: 1.5rem 0; display: block; }
+        #content ul, #content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; font-size: 1.05rem; }
+        #content li { margin-bottom: 0.5rem; }
+        #content code { background-color: #f4f4f4; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+        #content pre code { background-color: transparent; padding: 0; }
+        #content pre { background-color: #f6f8fa; padding: 1rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.5rem; }
+    </style>
+  </head>
+  <body>
+    <div class="container container-narrow pt-4 pb-5">
+      
+      <!-- Top Bar -->
+      <div class="topbar d-flex justify-content-between align-items-center">
+        <div><a href="blogs.html" class="text-dark font-weight-bold">← Research Blog</a></div>
+        <div><a href="index.html" class="text-muted">Home</a></div>
+      </div>
+
+      <!-- Markdown Content Container -->
+      <div id="content"></div>
+
+      <!-- 
+        ========================================
+        WRITE YOUR BLOG POST IN MARKDOWN BELOW
+        ========================================
+      -->
+      <textarea id="markdown-source" style="display:none;">
+# VideoAgent: Self-Improving Video World Models for Embodied Planning
+
+**Published:** Nov 2025 &nbsp; | &nbsp; **Author:** Abhranil Chandra
+
+Generative video models are getting incredibly good at simulating physics and object interactions. But can we use them as **World Models** for robots to plan their actions?
+
+In our recent paper *"Video Agent: Self-Improving Video World Models for Embodied Planning"* (TMLR 2025 / RLBrew@RLC), we explore this question. We found that while models like SORA or smaller diffusion transformers are impressive, they suffer from **compounding hallucinations** when used for long-horizon planning.
+
+## The Problem: Drift in Imagination
+
+When a robot tries to "imagine" a sequence of 20 actions to pick up a cup, small errors in frame 1 accumulate. By frame 10, the cup might have teleported or the gripper might have melted. This makes open-loop planning using video generation unreliable.
+
+## Our Solution: Self-Conditioning & VLM Feedback
+
+We introduce **VideoAgent**, a framework that improves the consistency of these video world models without requiring millions of new expert demonstrations.
+
+1. **Self-Conditioning:** We iteratively refine the generated video plan. We treat the generated video as a "draft" and condition the model on its own consistent frames to denoise the inconsistent ones.
+2. **VLM Feedback:** We use a Visual Language Model (like GPT-4V or Gemini) as a "verifier". The VLM watches the generated video plan and scores it based on physics violations and task completion. This score guides the search for the best plan.
+
+> "By closing the loop with VLM feedback, we turn a generative video model into a robust planner, achieving a 4x improvement in success rates on simulated manipulation tasks."
+
+## Results
+
+We tested this on both simulated environments (Meta-World) and real-world robotic manipulation videos. The agent was able to plan complex multi-stage tasks (like "open drawer" -> "place apple") by visually imagining the outcome and refining it until it looked physically plausible.
+
+This work suggests that the path to general-purpose robots might not just be better motor control policies, but better *visual imagination* capabilities that allow them to "think" before they act.
+
+[Read the full paper here](https://openreview.net/pdf?id=GDd5H92egZ)
+      </textarea>
+
+      <!-- Footer Navigation -->
+      <div class="pt-5 border-top mt-5 d-flex justify-content-between">
+        <a class="btn btn-outline-dark" href="blogs.html">← Back to All Blogs</a>
+        <a class="btn btn-dark" href="index.html">Go to Home</a>
+      </div>
+    </div>
+
+    <!-- JS to Render Markdown -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Get the markdown content
+        const markdownText = document.getElementById('markdown-source').value;
+        
+        // Configure Marked.js
+        marked.use({
+            gfm: true, // GitHub Flavored Markdown
+            breaks: true // Convert line breaks to <br>
+        });
+
+        // Render HTML
+        document.getElementById('content').innerHTML = marked.parse(markdownText);
+
+        // Apply syntax highlighting to code blocks (if any)
+        hljs.highlightAll();
+      });
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Research Blogs — Abhranil Chandra">
+    <meta name="author" content="Abhranil Chandra">
+    <meta name="theme-color" content="#222222">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/nicons/favicon-32x32.png">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Blogs — Abhranil Chandra</title>
+  </head>
+  <body>
+    <div class="container container-narrow pt-4 pb-5">
+      
+      <!-- Top Bar -->
+      <div class="topbar d-flex justify-content-between align-items-center">
+        <div><strong>Abhranil Chandra</strong></div>
+        <div>
+          <a href="index.html">← Back to Home</a>
+        </div>
+      </div>
+
+      <h1 class="mb-4">Research Blog</h1>
+      <p class="mb-5 text-muted">
+        Musings on Foundation Models, RL, and my latest research papers.
+      </p>
+
+      <!-- Blog Entries -->
+      
+      <!-- Blog 1 -->
+      <div class="blog-entry">
+        <div class="blog-title">
+            <a href="blog-videoagent.html">VideoAgent: Self-Improving Video World Models for Embodied Planning</a>
+        </div>
+        <div class="blog-meta">Nov 2025 · 5 min read</div>
+        <div class="blog-tldr">
+            <strong>TL;DR:</strong> Can we use generative video models as world models for robots? Yes, but they hallucinate and drift. We fix this with a self-conditioning consistency mechanism and VLM-guided feedback, allowing agents to plan better in the visual space.
+        </div>
+      </div>
+
+      <!-- Blog 2 (Dummy) -->
+      <div class="blog-entry">
+        <div class="blog-title">
+            <a href="#">Shape of Thought: Why Distribution Matters More than Correctness</a>
+        </div>
+        <div class="blog-meta">Oct 2025 · 7 min read</div>
+        <div class="blog-tldr">
+            <strong>TL;DR:</strong> We found something surprising: training LMs on incorrect reasoning traces (that match the model's distribution) works better than training on correct but out-of-distribution human traces. This suggests "reasoning" in LMs is heavily tied to distribution matching.
+        </div>
+      </div>
+
+      <!-- Blog 3 (Dummy) -->
+      <div class="blog-entry">
+        <div class="blog-title">
+            <a href="#">Q-Learning is not yet scalable (Replication)</a>
+        </div>
+        <div class="blog-meta">Jun 2025 · 4 min read</div>
+        <div class="blog-tldr">
+            <strong>TL;DR:</strong> A deep dive into the stability issues of scaling Q-learning with Transformers. My notes on reproducing recent offline RL papers and where they break down.
+        </div>
+      </div>
+
+      <div class="text-center pt-4">
+          <p class="text-muted">More posts coming soon...</p>
+      </div>
+
+      <div class="pt-5 border-top mt-5">
+        <a class="btn btn-dark" href="index.html">← Back to Home</a>
+      </div>
+    </div>
+  </body>
+</html>
