@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsupervised RL Pretraining: Toward Foundation Models for Behavior</title>
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a2e;
+            --accent: #0f3460;
+            --muted: #555;
+            --border: #e0e0e0;
+            --code-bg: #f5f5f5;
+            --link: #0f3460;
+            --blockquote-border: #0f3460;
+            --table-header-bg: #f0f4f8;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0d1117;
+                --text: #c9d1d9;
+                --accent: #58a6ff;
+                --muted: #8b949e;
+                --border: #30363d;
+                --code-bg: #161b22;
+                --link: #58a6ff;
+                --blockquote-border: #58a6ff;
+                --table-header-bg: #161b22;
+            }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 0 20px;
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 40px 0 80px;
+        }
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.9rem;
+        }
+        .nav a {
+            color: var(--link);
+            text-decoration: none;
+        }
+        .nav a:hover { text-decoration: underline; }
+
+        /* Title area */
+        h1.title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+        .subtitle {
+            font-style: italic;
+            color: var(--muted);
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+        .meta {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 40px;
+        }
+        hr.title-rule {
+            border: none;
+            border-top: 2px solid var(--accent);
+            margin: 30px 0 40px;
+            width: 60px;
+        }
+
+        /* Headings */
+        h2 {
+            font-size: 1.6rem;
+            margin: 48px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 36px 0 12px;
+            color: var(--text);
+        }
+        h4 {
+            font-size: 1.1rem;
+            margin: 28px 0 10px;
+            color: var(--text);
+            font-style: italic;
+        }
+
+        /* Body text */
+        p { margin-bottom: 18px; }
+        strong { font-weight: 700; }
+        em { font-style: italic; }
+
+        /* Links */
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Lists */
+        ul, ol {
+            margin: 12px 0 18px 28px;
+        }
+        li { margin-bottom: 6px; }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--blockquote-border);
+            padding: 12px 20px;
+            margin: 24px 0;
+            color: var(--muted);
+            font-style: italic;
+            background: var(--code-bg);
+            border-radius: 0 4px 4px 0;
+        }
+        blockquote p { margin-bottom: 0; }
+
+        /* Math display blocks */
+        .MathJax_Display, mjx-container[display="true"] {
+            overflow-x: auto;
+            padding: 8px 0;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.92rem;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        th, td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+        th {
+            background: var(--table-header-bg);
+            font-weight: 600;
+        }
+        td { font-variant-numeric: tabular-nums; }
+
+        /* Code */
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        /* Key takeaway boxes */
+        .takeaway {
+            background: var(--code-bg);
+            border-left: 4px solid var(--accent);
+            padding: 16px 20px;
+            margin: 24px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .takeaway strong {
+            display: block;
+            margin-bottom: 6px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+        }
+
+        /* Footer nav */
+        .footer-nav {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* Citation block */
+        .citation {
+            background: var(--code-bg);
+            padding: 16px 20px;
+            border-radius: 6px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            margin: 24px 0;
+            white-space: pre-wrap;
+        }
+
+        /* References */
+        .references {
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+        .references ol { padding-left: 24px; }
+        .references li { margin-bottom: 8px; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1.title { font-size: 1.6rem; }
+            h2 { font-size: 1.3rem; }
+            h3 { font-size: 1.1rem; }
+            .container { padding: 20px 0 40px; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 6px 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- Navigation -->
+<div class="nav">
+    <a href="index.html">&larr; Research Blog</a>
+    <a href="../index.html">Home</a>
+</div>
+
+<!-- Title -->
+<h1 class="title">Unsupervised RL Pretraining: Toward Foundation Models for Behavior</h1>
+<p class="subtitle">Learning without reward, acting without limits.</p>
+<p class="meta"><strong>Published:</strong> April 2026 &nbsp;|&nbsp; <strong>Author:</strong> Abhranil Chandra</p>
+
+<hr class="title-rule">
+
+<!-- ==================== CONTENT BEGINS ==================== -->
+
+<h2>Why Should You Care?</h2>
+
+<p>Large language models learned to write poetry, debate philosophy, and pass bar exams &mdash; all by predicting the next token on mountains of unlabeled text. No one hand-labeled those billions of sentences with &ldquo;this is good writing.&rdquo; The data itself, processed through a simple self-supervised objective, was enough.</p>
+
+<p>Now imagine doing the same thing for <em>behavior</em>. Instead of predicting the next word, an agent learns to predict &mdash; and enact &mdash; the next action, the next movement, the next decision, all from raw, unlabeled interaction data. No reward signal. No task specification. Just an agent immersed in an environment, extracting the deep structure of how the world works and what it can do in it.</p>
+
+<p>This is the promise of <strong>Unsupervised Reinforcement Learning (URL)</strong> pretraining &mdash; and I believe it is the most important open frontier in building truly autonomous, general-purpose agents.</p>
+
+<p>Label-free learning has been the engine behind recent progress in learning from large amounts of data. The breakthroughs in Large Language Models showcase just how effective it is to learn the generative process from massive corpora of text data. This success has catalyzed a parallel movement in reinforcement learning: learning without labels, learning from auxiliary objectives, and learning from the structure of interaction data itself. This blog provides a comprehensive review of this movement &mdash; the methods, the mathematics, the unifying theory, and the vision for where it all leads.</p>
+
+<p>If you work in RL, this post will give you a unified technical map of the landscape: from exploration-based methods to successor features to bisimulation metrics to contrastive objectives, and a recent theoretical lens that reveals they are all optimizing a shared underlying quantity. If you don&rsquo;t work in RL, this post will explain <em>why</em> this matters: why the path to robots that help in your home, agents that manage complex supply chains, and AI systems that learn open-endedly in the real world runs directly through the ideas described here.</p>
+
+
+<h2>The Core Problem: RL is Expensive, Narrow, and Fragile</h2>
+
+<p>Reinforcement Learning has produced stunning results &mdash; defeating world champions at Go (Silver et al., 2017), controlling nuclear fusion plasma (Degrave et al., 2022), optimizing chip design, and discovering faster matrix multiplication algorithms (Fawzi et al., 2022). But each of these is a single-task achievement. RL still relies on using a large number of environment interactions to learn a policy, which can make it prohibitively expensive.</p>
+
+<p>In many settings, such as robotics, the agent needs to solve a variety of tasks, described by different reward functions, in a single environment. Learning a new policy for each new task is prohibitively expensive. And most critically, it requires a <em>reward function</em> &mdash; a precise mathematical specification of what &ldquo;good&rdquo; means &mdash; which is notoriously hard to design well and easy to hack.</p>
+
+<p>The availability of data, however, has made its use inevitable. Although not all data is good, a lot of data used for training RL agents comes from unknown tasks, suboptimal demonstrations, and incomplete interactions. Methods to pretrain using this data are attractive because solving new tasks from scratch is simply not efficient.</p>
+
+<p>What if, instead of training from scratch, we could pretrain an agent on a massive corpus of reward-free interaction data &mdash; just states, actions, and transitions &mdash; and then, at test time, instantly produce a near-optimal policy for <em>any</em> reward function? No further training. No further environment interaction. Just <em>inference</em>.</p>
+
+<p>This is the paradigm of unsupervised RL pretraining, and the agents that achieve it are increasingly being called <strong>Behavioral Foundation Models (BFMs)</strong>.</p>
+
+
+<h2>Setting the Stage: The MDP Framework</h2>
+
+<p>All problem settings presented here operate within the Markov Decision Process (MDP) framework (Bellman, 1958). The environment is described as an MDP $M$ with state space $\mathcal{S}$, action space $\mathcal{A}$, transition dynamics $P(s'|s,a)$, and discount factor $\gamma \in [0,1)$. A policy $\pi(a|s)$ describes what action to take given a state $s$. Each task is defined via a reward function $r$ that maps state-action pairs to real-valued rewards.</p>
+
+<p>In the unsupervised pretraining setting, we have access to a dataset $\mathcal{D}$ of $N$ trajectories $\tau_i = (s_0^i, a_0^i, s_1^i, \ldots, s_{T_i}^i)$, collected using any policy (optimal or suboptimal), with <strong>no reward labels</strong>. The goal is to learn a representation $\mathcal{R}$ during a <em>reward-free phase</em> that enables efficient policy inference during a subsequent <em>reward-based phase</em> for any downstream task.</p>
+
+<p>We define a URL algorithm as one which consists of an unsupervised <strong>Reward-Free phase</strong> to learn $\mathcal{R}$ followed by a supervised <strong>Reward-Based phase</strong> that efficiently uses $\mathcal{R}$ to solve the RL problem for a wide variety of downstream tasks.</p>
+
+
+<h2>Part I: Methods &mdash; Curiosity and Structure</h2>
+
+<p>The field has converged on four major families of pretraining objectives organized around two driving forces: <strong>curiosity</strong> (the drive to explore and cover the space of possible behaviors) and <strong>structure</strong> (the drive to model and exploit the mathematical fabric of the environment&rsquo;s dynamics).</p>
+
+
+<h3>1. Exploration-Based Representations</h3>
+
+<p>Incorporating exploration as an objective can be used to learn diverse skills from data. Exploration-based works focus on invariance to task rewards.</p>
+
+<h4>1.1 Entropy Maximization for Zero-Shot Generalization</h4>
+
+<p>Zisselman et al. (2023) argue that exploring a domain is fundamentally harder than training a policy to maximize reward. They train a policy that maximizes the entropy of the marginal state-visitation distribution:</p>
+
+$$\max_\pi H\big(\rho^\pi(s)\big)$$
+
+<p>The entropy objective pushes the agent toward states it has not encountered, optimized over different MDPs sampled from a distribution. Entropy is computed by particle-based $k$-nearest neighbor approximation and treated as a reward for PPO. To steer behavior, they train an ensemble of policies and use the exploratory policy as fallback when the ensemble disagrees.</p>
+
+<h4>1.2 Prototypical Representations with Intrinsic Reward</h4>
+
+<p>Yarats et al. (2021) take a more sample-efficient approach: learn a set of prototypical embeddings forming a low-dimensional latent space, then use these prototypes to maximize an entropy-based intrinsic reward in encoded observation space (rather than raw state space). The intrinsic reward is appended with task reward to train a SAC agent for DeepMind Control benchmarks.</p>
+
+<h4>1.3 Diverse Temporal Behavior from Offline Data</h4>
+
+<p>Park et al. (2024) &mdash; Foundation Policies with Hilbert Representations (HILP) &mdash; learn a state representation $\phi$ that captures temporal structure from unlabeled trajectories by exploiting the equivalence between temporal distance and optimal goal-conditioned value functions. The representation spans a latent space of diverse skills, enabling few-shot adaptation by learning only task-dependent information.</p>
+
+<h4>1.4 Curiosity-Driven Online Exploration</h4>
+
+<p>Li et al. (2023) label unlabeled offline data with optimistic rewards using Random Network Distillation (RND), train an RL agent, collect new online data, and iteratively update the reward model. This proves effective for rapid exploration in challenging sparse-reward domains like AntMaze and Adroit hand manipulation.</p>
+
+<h4>1.5 Skill Extraction for Online Exploration</h4>
+
+<p>Wilcoxson et al. (2024) extract low-level skills from offline data using a variational encoder with a learned prior that keeps the posterior close to offline trajectories. A high-level policy is learned through online interaction &mdash; effective for tasks that fundamentally require exploration.</p>
+
+<div class="takeaway">
+    <strong>Key Takeaway</strong>
+    Curiosity-based approaches capture a notion of <em>diversity</em> and learn to disentangle this diversity for downstream tasks. How exploration relates to representation learning for downstream performance deserves additional study.
+</div>
+
+
+<h3>2. Structured Representations: Successor Features and Measures</h3>
+
+<p>These approaches learn representations that explicitly exploit structure in the environment. The structure across different tasks remains the same when the environment dynamics are the same.</p>
+
+<h4>2.1 Successor Features (SF)</h4>
+
+<p>Barreto et al. (2017), building on Dayan&rsquo;s (1993) successor representation, decompose the one-step reward into features $\phi(s)$ and weights $w$: $r(s) = \phi(s)^\top w$. The Q-function then decomposes as:</p>
+
+$$Q^\pi(s,a) = \psi^\pi(s,a)^\top w$$
+
+<p>where $\psi^\pi(s,a) = \mathbb{E}_\pi\left[\sum_{t \geq 0} \gamma^t \phi(s_t) \mid s, a\right]$ is the <strong>successor feature</strong>. Once learned, adapting to a new task reduces to linear regression. Combined with <strong>Generalized Policy Improvement (GPI)</strong>, SF enables transfer without task-specific information sharing.</p>
+
+<p>Extensions include Universal Successor Feature Approximators (Borsa et al., 2018), attention-based SF learning (Carvalho et al., 2023a), distributional SF (Carvalho et al., 2023b), first-occupancy representations for non-Markovian rewards (Moskovitz et al., 2021), and Active Pretraining with Successor Features (Liu &amp; Abbeel, 2021).</p>
+
+<h4>2.2 Successor Measures (SM)</h4>
+
+<p>Touati &amp; Ollivier (2021) introduced the <strong>successor measure</strong>, which encodes the discounted probability of visiting future states:</p>
+
+$$M^\pi(s, a, X) = \mathbb{E}_\pi\left[\sum_{t \geq 0} \gamma^t \mathbf{1}(s_{t+1} \in X) \mid s, a\right] \quad \forall X \subset \mathcal{S}$$
+
+<p>For <em>any</em> reward $r$, the Q-function is: $Q^\pi(s,a) = \sum_{s'} M^\pi(s,a,s') \cdot r(s')$. The successor measure completely disentangles dynamics from reward.</p>
+
+<p><strong>Forward-Backward (FB) Representations</strong> decompose $M^{\pi_z}(s,a,s^+) = F(s,a,z)^\top B(s^+)$, making inference a simple matrix-vector product: $z^* = Br$.</p>
+
+<h4>2.3 Proto-Successor Measures (PSM)</h4>
+
+<p>Agarwal et al. (2025) exploit the linearity of Bellman equations to represent the successor measure using a policy-independent affine basis:</p>
+
+$$M^\pi(s,a,s^+) = \sum_i \phi_i(s,a,s^+) w_i^\pi + b(s,a,s^+)$$
+
+<p>This spans the <em>entire space</em> of valid policies. At test time, obtaining the optimal policy reduces to solving a constrained linear program. For identical dimensionalities, the representable class of value functions strictly contains that of PVF-style approaches.</p>
+
+<div class="takeaway">
+    <strong>Key Takeaway</strong>
+    Successor Features and Measures offer a concise, mathematically principled way to represent environment structure. Structure in the environment dictates the structure in the solution space, but this interdependence needs further investigation.
+</div>
+
+
+<h3>3. Bisimulation-Based Representations</h3>
+
+<p>Bisimulation metrics capture invariance to task-irrelevant features by grouping functionally similar states. Two states are bisimilar if they yield the same immediate reward and transition to bisimilar states (Ferns et al., 2004).</p>
+
+<h4>3.1 Practical Bisimulation</h4>
+<p>Castro et al. (2021) introduced MICo &mdash; a sampling-based approximation for large state spaces. Zang et al. (2022) address representation collapse using cosine distance (SimSR).</p>
+
+<h4>3.2 Goal-Conditioned Bisimulation</h4>
+<p>Hansen-Estruch et al. (2022) define state-goal equivalence through matching rewards and transition distributions, enabling skill transfer across analogous manipulation tasks.</p>
+
+<h4>3.3 Bisimulation from Offline Data</h4>
+<p>Pavse et al. (2024) show bisimulation representations stabilize TD-learning and are Bellman complete on offline datasets. Zang et al. (2023) reduce estimation error with expectile operators.</p>
+
+<h4>3.4 Action Bisimulation</h4>
+<p>Shi et al. (2024) define a state-conditional action chunk bisimulation metric:</p>
+
+$$d(c_i, c_j \mid s_t) = |R_{s_t}^{c_i} - R_{s_t}^{c_j}| + \gamma \, W_2\big(P_{s_t}^{c_i}, P_{s_t}^{c_j}; d_c\big)$$
+
+<p>capturing long-horizon behavioral equivalence, validated on 7-DOF arm control. Rudolph et al. (2024) learn offline action representations via forward/inverse dynamics with bisimulation objectives.</p>
+
+<div class="takeaway">
+    <strong>Key Takeaway</strong>
+    Bisimulation captures behavioral similarity effectively but computing the metric through probability distributions remains a computational bottleneck.
+</div>
+
+
+<h3>4. Contrastive Learning-Based Representations</h3>
+
+<p>Contrastive learning exploits structure between similar and dissimilar pairs via the <strong>InfoNCE loss</strong>:</p>
+
+$$\mathcal{L}_\text{contrastive} = -\log \frac{\exp\big(\text{sim}(q, k^+)/\tau\big)}{\sum_{k \in \mathcal{K}} \exp\big(\text{sim}(q, k)/\tau\big)}$$
+
+<p>Laskin et al. (2020) demonstrated strong data efficiency with CURL. Ma et al. (2022) show a contrastive RL objective for zero-shot goal-conditioned generalization by dualizing a distribution-matching objective. Recent work reveals deep connections between contrastive RL, GCRL, and MISL through InfoNCE-style variational bounds.</p>
+
+
+<h2>Part II: The Unifying Perspective &mdash; It&rsquo;s All About the Successor Measure</h2>
+
+<p>A recent theoretical analysis (under review at ICLR 2026) reveals that <strong>all of these methods are approximating the same intractable objective &mdash; learning the successor measure $M^\pi$ &mdash; under different assumptions and state compressions.</strong></p>
+
+<h3>The Unified Objective</h3>
+
+<p>The successor measure $M^\pi(s,a,s^+)$ represents the discounted measure of ending in state $s^+$ starting from $s$, taking action $a$, and following $\pi$:</p>
+
+$$M^\pi(s, a, s^+) = \mathbb{E}_\pi\left[\sum_{t \geq 0} \gamma^t p^\pi(s_t = s^+ \mid s_0 = s, a_0 = a)\right]$$
+
+<p>Each URL method makes specific assumptions about: <strong>(1)</strong> $\Pi$ &mdash; the class of policies approximated, <strong>(2)</strong> $\mathcal{T}$ &mdash; the reward/task class, and <strong>(3)</strong> $\phi$ &mdash; the state compression. These create a fundamental <strong>performance-efficiency tradeoff</strong>.</p>
+
+<h3>How Each Family Fits</h3>
+
+<p><strong>GCRL:</strong> Learns $Q^{\pi_z}(s,a) \propto M^{\pi_z}(s,a,z)$. Instant inference, but restricted to goal-reaching rewards.</p>
+
+<p><strong>MISL:</strong> Learns $M^{\pi_z}(s, s^+) = \frac{q(z|s^+, s) p(s^+|s)}{p(z)}$ via variational skill posteriors. DIAYN uses the reverse MI decomposition $r_\text{int}(s,z) = \log q_\phi(z|s)$; METRA uses Wasserstein dependency measure for temporal-distance-aware skills.</p>
+
+<p><strong>SF:</strong> $M^{\pi_z}(s,a,s^+) = \psi(s,a,z)(\Phi^\top \Phi)^{-1} \Phi^\top$. Inference via linear regression $z^* = \arg\min_z \|r - \Phi^\top z\|^2$.</p>
+
+<p><strong>PSM:</strong> $M^{\pi_z}(s,a,s^+) = \sum_i \phi_i(s,a,s^+) w_i^\pi + b(s,a,s^+)$. Any reward function; constrained LP inference.</p>
+
+<p><strong>PVF:</strong> $M^{\pi_U}(s,s^+) = \phi w$ via graph Laplacian eigenvectors. Interpretable but policy inference requires LSPI.</p>
+
+<p><strong>Controllable Representations:</strong> $M^{\pi_\beta}_K(s,a,s^+) = \frac{f(a|s,s^+) p^{\pi_\beta}(s^+|s)}{\pi_\beta(a|s)}$ via multi-step inverse dynamics. Efficient representations but no direct policy.</p>
+
+<p><strong>World Models:</strong> $M^\pi$ as a generative model. Simple pretraining but inference requires planning.</p>
+
+
+<h3>State Equivalence: The Universal Compression Principle</h3>
+
+<p>Each URL method implicitly learns a <strong>state abstraction</strong> $\phi: \mathcal{S} \to \mathcal{X}$ grouping states with similar successor measures. Each defines a different equivalence metric:</p>
+
+<ul>
+    <li><strong>GCRL &amp; CR:</strong> $-\|\phi(s_1) - \phi(s_2)\|$ (Euclidean distance)</li>
+    <li><strong>MISL:</strong> $D_\text{KL}(q_\phi(z|s_1) \| q_\phi(z|s_2))$ (skill posterior divergence)</li>
+    <li><strong>SF, PSM, PVF:</strong> $\phi(s_1)^\top \phi(s_2)$ (inner product / cosine distance)</li>
+    <li><strong>World Models:</strong> Determined by chosen regularizer (reconstruction, variational, etc.)</li>
+</ul>
+
+
+<h3>The Pareto Frontier: Performance vs. Efficiency</h3>
+
+<p>Gridworld experiments confirm a clear tradeoff:</p>
+
+<table>
+    <thead>
+        <tr><th>Algorithm</th><th>Goal Tasks</th><th>RNI Tasks</th><th>Overall</th><th>Inference Params</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>GCRL</td><td>0.98</td><td>0.00</td><td>0.49</td><td>0</td></tr>
+        <tr><td>MISL (DIAYN)</td><td>0.38</td><td>0.73</td><td>0.56</td><td>0</td></tr>
+        <tr><td>SF (FB)</td><td>0.84</td><td>0.81</td><td>0.83</td><td>0</td></tr>
+        <tr><td>PSM</td><td>0.91</td><td>0.94</td><td>0.92</td><td>50</td></tr>
+        <tr><td>PVF</td><td>0.74</td><td>0.72</td><td>0.73</td><td>200</td></tr>
+        <tr><td>CR (ACRO)</td><td>0.87</td><td>0.77</td><td>0.82</td><td>26,112</td></tr>
+        <tr><td>World Model</td><td>0.88</td><td>0.83</td><td>0.86</td><td>588,800</td></tr>
+        <tr><td>Full RL (Oracle)</td><td>0.97</td><td>0.90</td><td>0.93</td><td>588,800</td></tr>
+    </tbody>
+</table>
+<p style="font-size:0.88rem; color:var(--muted); margin-top:-10px;"><em>Four-room gridworld, mean over 4 seeds. Cross-combinations (GCRL+SF, MISL+SF, PVF+SF) achieve favorable intermediate points.</em></p>
+
+
+<h2>Part III: Behavioral Foundation Models</h2>
+
+<p>A <strong>Behavioral Foundation Model (BFM)</strong> is an agent pretrained in unsupervised fashion on reward-free transitions that can produce approximately optimal policies for any test-time reward function without additional learning or planning. State-of-the-art BFMs build upon successor features and forward-backward representations.</p>
+
+<h3>Fast Adaptation: Beyond Zero-Shot</h3>
+
+<p>Zero-shot policies from BFMs are often suboptimal but are <em>excellent initializations</em>. Sikchi et al. (2025) propose <strong>ReLA</strong> (Residual Latent Adaptation) and <strong>LoLA</strong> (Lookahead Latent Adaptation) &mdash; strategies that search the low-dimensional task-embedding space to achieve 10&ndash;40% improvement in a few tens of episodes, mitigating the &ldquo;unlearning&rdquo; phase common in fine-tuning.</p>
+
+<h3>RLZero: From Language to Policy</h3>
+
+<p>The <strong>RLZero</strong> framework (Sikchi et al., 2024) demonstrates prompt-to-policy:</p>
+<ol>
+    <li><strong>Imagine:</strong> Generate video trajectories from language commands.</li>
+    <li><strong>Project:</strong> Map imagined frames to the agent&rsquo;s observation space via semantic similarity.</li>
+    <li><strong>Imitate:</strong> Use a pretrained BFM to match the imagined state-visitation distribution in zero-shot.</li>
+</ol>
+
+<p>This opens the possibility of prompting to generate a policy &mdash; a first approach to zero-shot cross-embodiment transfer.</p>
+
+
+<h2>Part IV: The Path to Generalist Agents</h2>
+
+<p>The recipe mirrors language models: <strong>(1)</strong> Massive reward-free interaction data, <strong>(2)</strong> Self-supervised objective capturing environment structure, <strong>(3)</strong> Scale, <strong>(4)</strong> Condition on task specification for instant behavioral inference.</p>
+
+<p>The platonic representation hypothesis suggests that as we build sufficiently rich simulators and train over increasingly complex task curricula, learned representations should converge toward reality&rsquo;s underlying structure. Agents trained in such settings could, in principle, zero-shot transfer to the real world.</p>
+
+
+<h2>Open Questions</h2>
+
+<ul>
+    <li><strong>What is the right pretraining objective?</strong> The &ldquo;next-token prediction&rdquo; equivalent for behavior has not yet been found.</li>
+    <li><strong>How does data coverage affect zero-shot performance?</strong> The impact of dataset quality on successor measure estimation is underexplored.</li>
+    <li><strong>Partial observability?</strong> No works have explored BFM performance under partial observability.</li>
+    <li><strong>Scaling to high-dimensional visual domains?</strong> Most methods are validated on locomotion benchmarks.</li>
+    <li><strong>Combining BFMs with large pretrained models?</strong> The intersection with VLMs and video generation is largely uncharted.</li>
+    <li><strong>Adaptation without forgetting?</strong> Efficient fine-tuning of pretrained behavioral representations remains open.</li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<p>Unsupervised RL pretraining is a fundamental paradigm shift. By learning from reward-free data, extracting the structure of how the world works, and leveraging that structure for instant policy inference, it offers a path to agents that are general, efficient, and adaptable.</p>
+
+<p>The unifying perspective reveals that beneath the diversity of algorithms lies a common mathematical core: all methods learn to predict future state distributions and compress that prediction into tractable representations. The performance-efficiency tradeoffs provide a practical roadmap for algorithm design.</p>
+
+<p>The successor measure is the backbone. The data is accumulating. The models are getting bigger. The question is not <em>whether</em> this paradigm will produce general-purpose behavioral agents, but <em>when</em> &mdash; and what the right pretraining recipe will turn out to be.</p>
+
+
+<h2>References</h2>
+
+<div class="references">
+<ol>
+    <li>Bellman, R. Dynamic programming and stochastic control processes. <em>Information and Control</em>, 1958.</li>
+    <li>Barreto, A., Dabney, W., Munos, R., et al. Successor features for transfer in RL. <em>NeurIPS</em>, 2017.</li>
+    <li>Borsa, D., Barreto, A., et al. Universal successor features approximators. <em>arXiv:1812.07626</em>, 2018.</li>
+    <li>Burda, Y., Edwards, H., Storkey, A., Klimov, O. Exploration by random network distillation. 2018.</li>
+    <li>Carvalho, W., et al. Composing task knowledge with modular SF approximators. 2023a.</li>
+    <li>Carvalho, W., et al. Combining behaviors with the successor features keyboard. <em>NeurIPS</em>, 2023b.</li>
+    <li>Castro, P.S., et al. MICo: Improved representations via sampling-based state similarity. <em>NeurIPS</em>, 2021.</li>
+    <li>Ferns, N., Panangaden, P., Precup, D. Metrics for finite MDPs. <em>UAI</em>, 2004.</li>
+    <li>Hansen-Estruch, P., et al. Bisimulation makes analogies in goal-conditioned RL. <em>ICML</em>, 2022.</li>
+    <li>Kemertas, M., Aumentado-Armstrong, T. Towards robust bisimulation metric learning. <em>NeurIPS</em>, 2021.</li>
+    <li>Laskin, M., Srinivas, A., Abbeel, P. CURL: Contrastive unsupervised representations for RL. <em>ICML</em>, 2020.</li>
+    <li>Liu, H. and Abbeel, P. APS: Active pretraining with successor features. <em>ICML</em>, 2021.</li>
+    <li>Li, Q., et al. Accelerating exploration with unlabeled prior data. <em>NeurIPS</em>, 2023.</li>
+    <li>Ma, Y.J., et al. VIP: Towards universal visual reward and representation. 2022.</li>
+    <li>Moskovitz, T., Wilson, S.R., Sahani, M. A first-occupancy representation for RL. 2021.</li>
+    <li>Park, S., Kreiman, T., Levine, S. Foundation policies with Hilbert representations. 2024.</li>
+    <li>Pavse, B.S., et al. Stable offline value function learning with bisimulation representations. 2024.</li>
+    <li>Rudolph, M., et al. Learning action-based representations using invariance. 2024.</li>
+    <li>Schaul, T., et al. Universal value function approximators. <em>ICML</em>, 2015.</li>
+    <li>Shi, L., et al. Self-supervised bisimulation action chunk representation. <em>NeurIPS Workshop</em>, 2024.</li>
+    <li>Touati, A., Ollivier, Y. Learning one representation to optimize all rewards. <em>NeurIPS</em>, 2021.</li>
+    <li>Wilcoxson, M., et al. Leveraging skills from unlabeled prior data. 2024.</li>
+    <li>Yarats, D., et al. RL with prototypical representations. <em>ICML</em>, 2021.</li>
+    <li>Yin, X., et al. Representation-based robustness in goal-conditioned RL. <em>AAAI</em>, 2024.</li>
+    <li>Zang, H., Li, X., Wang, M. SimSR: Simple distance-based state representations. <em>AAAI</em>, 2022.</li>
+    <li>Zang, H., et al. Pitfalls of bisimulation representations in offline RL. <em>NeurIPS</em>, 2023.</li>
+    <li>Zisselman, E., et al. Explore to generalize in zero-shot RL. <em>NeurIPS</em>, 2023.</li>
+    <li>Agarwal, S., Sikchi, H., Stone, P., Zhang, A. Proto successor measure. 2025.</li>
+    <li>Touati, A., Rapin, J., Ollivier, Y. Does zero-shot RL exist? <em>ICLR</em>, 2023.</li>
+    <li>Sikchi, H., et al. RLZero: Zero-shot prompt to policy. 2024.</li>
+    <li>Sikchi, H., et al. Fast adaptation with behavioral foundation models. 2025.</li>
+    <li>Anonymous. A unifying perspective on unsupervised RL algorithms. Under review, <em>ICLR</em>, 2026.</li>
+    <li>Eysenbach, B., et al. Diversity is all you need (DIAYN). <em>ICLR</em>, 2019.</li>
+    <li>Park, S., Rybkin, O., Levine, S. METRA: Scalable unsupervised RL. <em>ICLR</em>, 2024.</li>
+    <li>Dayan, P. The successor representation. <em>Neural Computation</em>, 5(4), 1993.</li>
+    <li>Farebrother, J., et al. Proto-value networks. <em>ICLR</em>, 2023.</li>
+    <li>Mahadevan, S. Proto-value functions. <em>ICML</em>, 2005.</li>
+    <li>Islam, R., et al. ACRO: Agent-centric representations for controllability. 2023.</li>
+    <li>Hafner, D., et al. Dream to control: Learning behaviors by latent imagination. <em>ICLR</em>, 2020.</li>
+    <li>Pirotta, M., et al. Fast imitation via behavior foundation models. 2024.</li>
+    <li>Tirinzoni, A., et al. Zero-shot whole-body humanoid control via BFMs. <em>ICLR</em>, 2025.</li>
+    <li>Gregor, K., Rezende, D.J., Wierstra, D. Variational intrinsic control. 2016.</li>
+    <li>Eysenbach, B., et al. The information geometry of unsupervised RL. <em>ICLR</em>, 2022.</li>
+    <li>Zheng, C., et al. Can a MISL fly? <em>ICLR</em>, 2025.</li>
+    <li>Choi, J., et al. Variational empowerment as representation learning for GCRL. <em>ICML</em>, 2021.</li>
+    <li>Eysenbach, B., et al. Contrastive learning as goal-conditioned RL. <em>NeurIPS</em>, 2022.</li>
+    <li>Silver, D., et al. Mastering Go without human knowledge. <em>Nature</em>, 2017.</li>
+    <li>Degrave, J., et al. Magnetic control of tokamak plasmas via deep RL. <em>Nature</em>, 2022.</li>
+    <li>Fawzi, A., et al. Discovering faster matrix multiplication algorithms with RL. <em>Nature</em>, 2022.</li>
+    <li>Gu, P., et al. Learning pseudometric-based action representations for offline RL.</li>
+    <li>Machado, M.C., Barreto, A., Precup, D. Temporal abstraction with the SR. <em>JMLR</em>, 2023.</li>
+</ol>
+</div>
+
+
+<!-- Citation -->
+<h2>Citation</h2>
+<p>If you found this useful in your academic work, please cite:</p>
+<div class="citation">Chandra, Abhranil. Unsupervised RL Pretraining: Toward Foundation Models for Behavior.
+https://abhranilchandra.github.io/blogs/unsupervised-rl.html. April 2026.</div>
+
+
+<!-- Footer navigation -->
+<div class="footer-nav">
+    <a href="index.html">&larr; Back to All Blogs</a>
+    <a href="../index.html">Go to Home</a>
+</div>
+
+</div><!-- end container -->
+</body>
+</html>
